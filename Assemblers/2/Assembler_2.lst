@@ -1,0 +1,86 @@
+Microsoft (R) Macro Assembler Version 14.27.29111.0	    05/02/21 10:50:17
+Asm2.asm						     Page 1 - 1
+
+
+				.586P
+				.MODEL FLAT, STDCALL
+				includelib kernel32.lib
+
+				ExitProcess PROTO : DWORD
+				MessageBoxA PROTO : DWORD, : DWORD, : DWORD, : DWORD
+
+				.STACK 4096
+
+ 00000000			.CONST
+
+ 00000000			.DATA
+ 00000000 D1 E0 EF E5 E3	str2 BYTE "Сапегина Asm2", 0
+	   E8 ED E0 20 41
+	   73 6D 32 00
+ 0000000E 32 20 2B 20 33	str1 BYTE "2 + 3 = 0", 0
+	   20 3D 20 30 00
+
+ 00000018 02			first		BYTE 2
+ 00000019 03			second		BYTE 3
+
+ 00000000			.CODE
+ 00000000			main PROC
+ 00000000			START:
+ 00000000  A0 00000018 R			mov al, first
+ 00000005  02 05 00000019 R			add al, second
+ 0000000B  00 05 00000017 R			add str1[9], al
+					
+						INVOKE MessageBoxA, 0, offset str1, offset str2, 0
+
+ 00000024  6A FF			push	-1
+ 00000026  E8 00000000 E		call	ExitProcess
+ 0000002B			main ENDP
+
+				end main
+Microsoft (R) Macro Assembler Version 14.27.29111.0	    05/02/21 10:50:17
+Asm2.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+CONST  . . . . . . . . . . . . .	32 Bit	 00000000 Para	  Public  'CONST'	 ReadOnly
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 0000001A Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000002B Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+ExitProcess  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+MessageBoxA  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000002B Public STDCALL
+  START  . . . . . . . . . . . .	L Near	 00000000 _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000003h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+first  . . . . . . . . . . . . .	Byte	 00000018 _DATA	
+second . . . . . . . . . . . . .	Byte	 00000019 _DATA	
+str1 . . . . . . . . . . . . . .	Byte	 0000000E _DATA	
+str2 . . . . . . . . . . . . . .	Byte	 00000000 _DATA	
+
+	   0 Warnings
+	   0 Errors
